@@ -14,7 +14,7 @@ Replaces something like:
     }
 
 /* Handling sorted lists to find a particular value or set of values can 
-utilize multiple pointers as an approach */
+utilize Multiple Pointer Pattern as an approach */
 
     // if altering the original array is allowed:
     function countUniqueValues(arr) {
@@ -45,4 +45,29 @@ utilize multiple pointers as an approach */
         }
         
         return total + 1;
+    }
+
+/* Sliding Window pattern, slide the window where you only 
+need to look at the newest and oldest values instead of running the entire
+list - O(n) instead of O(n2) */
+
+    function maxArraySum(arr, windowSize) {
+        if (!windowSize || windowSize > arr.length) {
+        return null;
+        }
+        
+        let max = -Infinity;
+        let temp = 0;
+        
+        for (let i = 0; i < windowSize; i++) {
+        temp += arr[i];
+        }
+        
+        max = temp;
+        for (let j = windowSize; j < arr.length; j++) {
+        temp = temp - arr[j - windowSize] + arr[j];
+        max = Math.max(temp, max);
+        }
+        
+        return max;
     }
