@@ -71,3 +71,21 @@ list - O(n) instead of O(n2) */
         
         return max;
     }
+
+/* Interesting way of checking for duplicates is by leveraging the Set() 
+Replaces something like - 
+    const obj = {};
+  
+    for (let en of args) {
+        if (!obj[en]) {
+            obj[en] = 1;
+        } else {
+            return false;
+        }
+    }
+    
+    return true;
+*/
+    function areDupes() {
+        return new Set(arguments).size !== arguments.length;
+    }
