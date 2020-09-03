@@ -89,3 +89,36 @@ Replaces something like -
     function areDupes() {
         return new Set(arguments).size !== arguments.length;
     }
+
+/* Memoized Fibonacci */
+
+    function fibonacci(n,memo) {
+        memo = memo || {};
+
+        if (memo[n]) {
+            return memo[n]
+        }
+        if (n <= 1) {
+            return 1
+        }
+        return memo[n] = fibonacci(n - 1, memo) + fibonacci(n - 2, memo)
+    }
+
+/* Bubble sort algo */
+
+    function bubbleSort (arr) {
+        let noSwaps = true;
+        for (let i = arr.length - 1; i > 0; i++) {
+        for (let j = 0; j < i; j++) {
+            if (arr[j] > arr[j+1]) {
+            [arr[j], arr[j+1]] = [arr[j+1], arr[j]];
+            noSwaps = false;
+            }
+        }
+        if (noSwaps) {
+            break;
+        }
+        }
+        
+        return arr;
+    }
