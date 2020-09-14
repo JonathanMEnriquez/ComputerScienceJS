@@ -104,6 +104,8 @@ Replaces something like -
         return memo[n] = fibonacci(n - 1, memo) + fibonacci(n - 2, memo)
     }
 
+// SORTS
+
 /* Bubble sort algo */
 
     function bubbleSort (arr) {
@@ -121,4 +123,49 @@ Replaces something like -
         }
         
         return arr;
+    }
+
+/* Selection sort algo */
+
+    function selectionSort(arr) {
+        const len = arr.length;
+
+        for (let i = 0; i < len; i++) {
+            let min = i;
+            
+            for (let j = i+1; j < len; j++) {
+            if (arr[j] < arr[min]) {
+                min = j;
+            }
+            }
+            
+            if (i !== min) {
+            // swap
+            [arr[i], arr[min]] = [arr[min], arr[i]];
+            }
+        }
+
+        return arr;
+    }
+
+/* Insertion Sort */
+
+    function insertionSort(arr) {
+        const len = arr.length;
+        let j = null;
+        for (let i = 1; i < len; i++) {
+        const currVal = arr[i];
+        
+        for (j = i-1; j >= 0; j--) {
+            if (arr[j] > currVal) {
+            arr[j+1] = arr[j];
+            } else {
+            break;
+            }
+        }
+        
+        arr[j+1] = currVal;
+        }
+        
+        console.log(arr);
     }
