@@ -111,15 +111,15 @@ Replaces something like -
     function bubbleSort (arr) {
         let noSwaps = true;
         for (let i = arr.length - 1; i > 0; i++) {
-        for (let j = 0; j < i; j++) {
-            if (arr[j] > arr[j+1]) {
-            [arr[j], arr[j+1]] = [arr[j+1], arr[j]];
-            noSwaps = false;
+            for (let j = 0; j < i; j++) {
+                if (arr[j] > arr[j+1]) {
+                    [arr[j], arr[j+1]] = [arr[j+1], arr[j]];
+                    noSwaps = false;
+                }
             }
-        }
-        if (noSwaps) {
-            break;
-        }
+            if (noSwaps) {
+                break;
+            }
         }
         
         return arr;
@@ -134,14 +134,14 @@ Replaces something like -
             let min = i;
             
             for (let j = i+1; j < len; j++) {
-            if (arr[j] < arr[min]) {
-                min = j;
-            }
+                if (arr[j] < arr[min]) {
+                    min = j;
+                }
             }
             
             if (i !== min) {
-            // swap
-            [arr[i], arr[min]] = [arr[min], arr[i]];
+                // swap
+                [arr[i], arr[min]] = [arr[min], arr[i]];
             }
         }
 
@@ -154,18 +154,59 @@ Replaces something like -
         const len = arr.length;
         let j = null;
         for (let i = 1; i < len; i++) {
-        const currVal = arr[i];
-        
-        for (j = i-1; j >= 0; j--) {
-            if (arr[j] > currVal) {
-            arr[j+1] = arr[j];
-            } else {
-            break;
+            const currVal = arr[i];
+            
+            for (j = i-1; j >= 0; j--) {
+                if (arr[j] > currVal) {
+                    arr[j+1] = arr[j];
+                } else {
+                    break;
+                }
             }
-        }
-        
-        arr[j+1] = currVal;
+            
+            arr[j+1] = currVal;
         }
         
         console.log(arr);
+    }
+
+/* Merge Sort 
+    Big O -  */
+
+    function merge(arr1, arr2) {
+        const first = arr1.length >= arr2.length ? arr1 : arr2;
+        const last = arr1.length >= arr2.length ? arr2 : arr1;
+        let i = 0,
+            j = 0;
+        const merged = [];
+        
+        while (j < last.length) {
+          if (first[i] < last[j]) {
+            merged.push(first[i]);
+            i++;
+          } else {
+            merged.push(last[j]);
+            j++;
+          }
+        }
+        
+        if (first.length !== last.length) {
+          while (i < first.length) {
+            merged.push(first[i]);
+            i++;
+          }
+        }
+        
+        return merged;
+      }
+      
+    function mergeSort(arr) {
+        if (arr.length <= 1) {
+          return arr;
+        }
+        
+        let mid = Math.floor(arr.length / 2);
+        let left = mergeSort(arr.slice(0, mid));
+        let right = mergeSort(arr.slice(mid));
+        return merge(left, right);
     }
